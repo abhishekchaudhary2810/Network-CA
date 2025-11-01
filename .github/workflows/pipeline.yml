@@ -25,7 +25,9 @@ jobs:
         run: docker build -t $IMAGE_NAME .
 
       - name: Save Docker image to tar
-        run: docker save $IMAGE_NAME -o $IMAGE_NAME.tar
+        run: docker save $IMAGE_NAME -o ${{ github.workspace }}/simple-html-app.tar
+      - name: Set permissions on tar file
+        run: chmod 644 ${{ github.workspace }}/simple-html-app.tar
 
       - name: Copy Docker image to EC2
         uses: appleboy/scp-action@v0.1.7
