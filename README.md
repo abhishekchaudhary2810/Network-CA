@@ -126,9 +126,9 @@ resource "aws_instance" "web-server" {
 
 ## Ansible Playbook to Install and Deploy Docker:
 
-#--- 
+ 
 
-#- name: Install and configure Docker on Amazon Linux 2023 
+ # name: Install and configure Docker on Amazon Linux 2023 
 
  hosts: web 
 
@@ -136,9 +136,9 @@ resource "aws_instance" "web-server" {
 
  
 
- tasks: 
+  tasks: 
 
-   #- name: Update all packages 
+   - name: Update all packages 
 
      dnf: 
 
@@ -150,7 +150,7 @@ resource "aws_instance" "web-server" {
 
  
 
-   #- name: Install Docker 
+   - name: Install Docker 
 
      dnf: 
 
@@ -160,7 +160,7 @@ resource "aws_instance" "web-server" {
 
  
 
-   #- name: Enable and start Docker service 
+   - name: Enable and start Docker service 
 
      systemd: 
 
@@ -172,7 +172,7 @@ resource "aws_instance" "web-server" {
 
  
 
-   #- name: Add ec2-user to docker group 
+   - name: Add ec2-user to docker group 
 
      user: 
 
