@@ -128,7 +128,7 @@ resource "aws_instance" "web-server" {
 
  
 
- # name: Install and configure Docker on Amazon Linux 2023 
+ name: Install and configure Docker on Amazon Linux 2023 
 
  hosts: web 
 
