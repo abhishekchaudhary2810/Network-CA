@@ -214,7 +214,7 @@ FROM nginx:alpine                                                               
 
 COPY index.html /usr/share/nginx/html/index.html                                --> this will copy the index.html file to nginx server
 
-EXPOSE 80                                                                       --> application will run port 80
+EXPOSE 80                                                                       --> application will run port on 80
 
 ## Ansible Playbook to start the Docker and building the Docker Image
 
