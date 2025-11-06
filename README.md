@@ -21,11 +21,11 @@ This project describes the steps involved in creation of an AWS EC2 instance wit
 
 ## Configuration of AWS account:
 
-  We will use this "aws configure" in the VS code terminal, then we will take these input from console,
-AWS Access Key ID [****************INOB]: "aws access ID"
-AWS Secret Access Key [****************ZgAM]: "aws secret access key"
-Default region name [eu-west-1]: "region"
-Default output format [json]: "json"  
+  We will use this "aws configure" command in the VS code terminal, then we will take these input from console,
+  *AWS Access Key ID [****************INOB]: "aws access ID"
+  *AWS Secret Access Key [****************ZgAM]: "aws secret access key"
+  *Default region name [eu-west-1]: "region"
+  *Default output format [json]: "json"  
 
 ## Creation of EC2:
 
