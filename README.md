@@ -136,6 +136,15 @@ resource "aws_instance" "web-server" {
     ** terraform init: creates an execution plan.
     ** terraform apply: apply the commands and create the infrastructure.
 
+
+## Connecting Ansible to the created EC2 instance: 
+
+The host.ini file contains the information about the server and login key so Ansible can be used on the created server. Using this command, 
+
+[web] 
+
+34.243.176.103 ansible_user=ec2-user ansible_ssh_private_key_file =/Users/shellysiwach/.ssh/my-ec2-key 
+
   
 ## Ansible Playbook to Install and Deploy Docker:
 
