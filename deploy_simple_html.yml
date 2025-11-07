@@ -5,7 +5,7 @@
 
   vars:
     app_name: simple-html-app
-    app_port: 3000
+    app_port: 80
     docker_image: simple-html-app
     docker_container: simple-html-app
 
