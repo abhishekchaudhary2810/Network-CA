@@ -1,0 +1,56 @@
+---
+- name: Deploy simple HTML Docker container
+  hosts: web
+  become: true
+
+  vars:
+    app_name: simple-html-app
+    app_port: 3000
+    docker_image: simple-html-app
+    docker_container: simple-html-app
+
+  tasks:
+    - name: Ensure Docker is installed
+      package:
+        name: docker
+        state: present
+
+    - name: Start and enable Docker service
+      systemd:
+        name: docker
+        enabled: true
+        state: started
+
+    - name: Create app directory
+      file:
+        path: /opt/{{ app_name }}
+        state: directory
+        mode: '0755'
+
+    - name: Copy index.html to server
+      copy:
+        src: index.html
+        dest: /opt/{{ app_name }}/index.html
+
+    - name: Copy Dockerfile to server
+      copy:
+        src: Dockerfile
+        dest: /opt/{{ app_name }}/Dockerfile
+
+    - name: Build Docker image
+      docker_image:
+        name: "{{ docker_image }}"
+        source: build
+        build: 
+          path: /opt/{{app_name}}
+
+    - name: Run Docker container
+      docker_container:
+        name: "{{ docker_container }}"
+        image: "{{ docker_image }}"
+        state: started
+        restart_policy: always
+        published_ports:
+          - "{{ app_port }}:80"
+
+          
