@@ -48,6 +48,6 @@ jobs:
             sudo docker load -i simple-html-app.tar
             sudo docker stop simple-html-app || true
             sudo docker rm simple-html-app || true
-            sudo docker run -d -p 3000:80 --name simple-html-app simple-html-app
+            sudo docker run -d -p 80:80 --name simple-html-app simple-html-app
 
        
