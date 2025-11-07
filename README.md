@@ -198,23 +198,8 @@ The host.ini file contains the information about the server and login key so Ans
 
 ## Creation of the Web page:
 
-    <!DOCTYPE html> 
-
-<html> 
-
-<head> 
-
- <title>My Simple App</title> 
-
-</head> 
-
-<body> 
 
  <h1>Hello, world!</h1> 
-
-</body> 
-
-</html> 
 
 
 ## Creation of the Docker File:
