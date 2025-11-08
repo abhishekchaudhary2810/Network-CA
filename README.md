@@ -143,7 +143,7 @@ The host.ini file contains the information about the server and login key so Ans
 
 [web] 
 
-34.243.176.103 ansible_user=ec2-user ansible_ssh_private_key_file =/Users/shellysiwach/.ssh/my-ec2-key 
+<<IP>> ansible_user=ec2-user ansible_ssh_private_key_file =/Users/shellysiwach/.ssh/my-ec2-key 
 
   
 ## Ansible Playbook to Install and Deploy Docker:
@@ -224,7 +224,7 @@ EXPOSE 80                                                                       
 
    app_name: simple-html-app 
 
-   app_port: 3000 
+   app_port: 80
 
    docker_image: simple-html-app 
 
