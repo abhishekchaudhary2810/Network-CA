@@ -336,25 +336,25 @@ jobs:
     environment:
       name: network
 
-    env:
+ env:
       IMAGE_NAME: simple-html-app
       EC2_HOST: ${{ secrets.EC2_HOST }}
       EC2_USER: ${{ secrets.EC2_USER }}
       SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
 
-    steps:
-      - name: Checkout code
+ steps:
+    - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Build Docker image
+    - name: Build Docker image
         run: docker build -t $IMAGE_NAME .
 
-      - name: Save Docker image to tar
+    - name: Save Docker image to tar
         run: docker save $IMAGE_NAME -o ${{ github.workspace }}/simple-html-app.tar
       - name: Set permissions on tar file
         run: chmod 644 ${{ github.workspace }}/simple-html-app.tar
 
-      - name: Copy Docker image to EC2
+     - name: Copy Docker image to EC2
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ env.EC2_HOST }}
@@ -362,8 +362,8 @@ jobs:
           key: ${{ env.SSH_KEY }}
           source: simple-html-app.tar
           target: /home/${{ env.EC2_USER }}
-
-      - name: Load and run Docker container on EC2
+          
+    - name: Load and run Docker container on EC2
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: ${{ env.EC2_HOST }}
