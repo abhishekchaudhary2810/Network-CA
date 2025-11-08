@@ -335,14 +335,12 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: network
-
  env:
       IMAGE_NAME: simple-html-app
       EC2_HOST: ${{ secrets.EC2_HOST }}
       EC2_USER: ${{ secrets.EC2_USER }}
       SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
-
- steps:
+steps:
     - name: Checkout code
         uses: actions/checkout@v3
 
