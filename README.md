@@ -319,7 +319,61 @@ We have created a workflow file to automate the actions, whenever there is a cha
 
  * Save the Docker image as tar file. 
 
- * Copy the Docker image and run the container on the EC2 machine. 
+ * Copy the Docker image and run the container on the EC2 machine.
+
+## Workflow of the CI/CD Pipeline:
+
+name: Build and Deploy Docker Container
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: network
+
+    env:
+      IMAGE_NAME: simple-html-app
+      EC2_HOST: ${{ secrets.EC2_HOST }}
+      EC2_USER: ${{ secrets.EC2_USER }}
+      SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: docker build -t $IMAGE_NAME .
+
+      - name: Save Docker image to tar
+        run: docker save $IMAGE_NAME -o ${{ github.workspace }}/simple-html-app.tar
+      - name: Set permissions on tar file
+        run: chmod 644 ${{ github.workspace }}/simple-html-app.tar
+
+      - name: Copy Docker image to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ env.EC2_HOST }}
+          username: ${{ env.EC2_USER }}
+          key: ${{ env.SSH_KEY }}
+          source: simple-html-app.tar
+          target: /home/${{ env.EC2_USER }}
+
+      - name: Load and run Docker container on EC2
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ env.EC2_HOST }}
+          username: ${{ env.EC2_USER }}
+          key: ${{ env.SSH_KEY }}
+          script: |
+            sudo docker load -i simple-html-app.tar
+            sudo docker stop simple-html-app || true
+            sudo docker rm simple-html-app || true
+            sudo docker run -d -p 80:80 --name simple-html-app simple-html-app
 
 
 
